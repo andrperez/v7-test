@@ -1,0 +1,31 @@
+<div class="animals-list">
+    <h1>Listado de animales</h1>
+    <ul>
+        @for (animal of animals: track animal.id; let idx = $index) {
+            <h2> {{idx + 1}} {{ animal.name}}
+                <div class="classification">
+                    @switch(animal.classification){
+                        @case ('mamifero'){ <span class="mamifero">Mamifero</span> }
+                        @case ('ave'){ <span class="mamifero">Ave</span> }
+                        @default { <span class="default">Desconocido</span> }
+                    }
+                </div>
+                
+                <button class="btn-details" (click)="toggleDetails (animal)"> 
+                    {{ animal.showDetails ? "Ocultar Detalles": "Mostrar Detalles" }}
+                </button>
+            </h2>
+            @if (animal.showDetails) {
+                <div class="details">
+                    <p>Detalles: {{ animal.details }}</p>
+                </div>
+            } @else {
+                <div class="summary">
+                    <p>Detalles: {{ animal.summary }}</p>
+                </div>
+            }
+        }@empty {
+            <h2>No hay animales que mostrar</h2>
+        }
+    </ul>
+</div>
